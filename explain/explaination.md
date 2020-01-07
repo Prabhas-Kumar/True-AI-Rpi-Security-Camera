@@ -29,7 +29,7 @@ sudo bash setup_of_Rpi_for_Thlite_part2.sh
 After it's been completed issue this to test it:
 ```
 
-ython3 TFLite_detection_webcam.py --modeldir=Sample_TFLite_model
+python3 TFLite_detection_webcam.py --modeldir=Sample_TFLite_model
 ```
 
 If your model folder has a different name than "Sample_TFLite_model", use that name instead. For example, I would use --modeldir=BirdSquirrelRaccoon_TFLite_model to run my custom bird, squirrel, and raccoon detection model.
