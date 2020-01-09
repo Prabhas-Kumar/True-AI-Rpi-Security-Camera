@@ -228,7 +228,6 @@ while True:
     # Press 'q' to quit at any time
     if cv2.waitKey(1) == ord('q'):
         break
-
 # Clean up
 cv2.destroyAllWindows()
 videostream.stop()
