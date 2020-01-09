@@ -183,3 +183,4 @@ for image_path in images:
 
 # Clean up
 cv2.destroyAllWindows()
+
