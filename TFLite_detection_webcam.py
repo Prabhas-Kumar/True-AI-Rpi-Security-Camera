@@ -1,19 +1,18 @@
-######## Webcam Object Detection Using Tensorflow-trained Classifier #########
+######## Webcam Object Detection Using Tensorflow-trained Classifier(Lite verion) #########
 #
-# Author: Evan Juras
-# Date: 10/27/19
-# Description: 
+# Author: Prabhas Kumar
+# Date: 1/8/20
+# Description:-
+#
 # This program uses a TensorFlow Lite model to perform object detection on a live webcam
 # feed. It draws boxes and scores around the objects of interest in each frame from the
 # webcam. To improve FPS, the webcam object runs in a separate thread from the main program.
-# This script will work with either a Picamera or regular USB webcam.
+# This script will work with either a Picamera or regular USB webcam. 
 #
-# This code is based off the TensorFlow Lite image classification example at:
-# https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/examples/python/label_image.py
-#
-# I added my own method of drawing boxes and labels using OpenCV.
+# I added my own method of drawing boxes and labels using OpenCV & It is different from oficial method 
+# because I find it is more clean, easy & fast/easy to learn or understand!
 
-# Import packages
+# Import all packages & libraries
 import os
 import argparse
 import cv2
@@ -65,23 +64,30 @@ class VideoStream:
 	# Indicate that the camera and thread should be stopped
         self.stopped = True
 
-# Define and parse input arguments
+# Define and parse input arguments [ie. the arguments that can be given by user in Linux terminal]
 parser = argparse.ArgumentParser()
+# directory of the model
 parser.add_argument('--modeldir', help='Folder the .tflite file is located in',
                     required=True)
+# name of the model [graph]
 parser.add_argument('--graph', help='Name of the .tflite file, if different than detect.tflite',
                     default='detect.tflite')
+# name of the labelmap file
 parser.add_argument('--labels', help='Name of the labelmap file, if different than labelmap.txt',
                     default='labelmap.txt')
+# minimum confidence score   
 parser.add_argument('--threshold', help='Minimum confidence threshold for displaying detected objects',
                     default=0.5)
+# webcam resolution in WxH
 parser.add_argument('--resolution', help='Desired webcam resolution in WxH. If the webcam does not support the resolution entered, errors may occur.',
                     default='1280x720')
+# for TPU, not recomended to begainner
 parser.add_argument('--edgetpu', help='Use Coral Edge TPU Accelerator to speed up detection',
                     action='store_true')
 
 args = parser.parse_args()
 
+# variables for model
 MODEL_NAME = args.modeldir
 GRAPH_NAME = args.graph
 LABELMAP_NAME = args.labels
@@ -198,7 +204,7 @@ while True:
             ymax = int(min(imH,(boxes[i][2] * imH)))
             xmax = int(min(imW,(boxes[i][3] * imW)))
             
-            cv2.rectangle(frame, (xmin,ymin), (xmax,ymax), (10, 255, 0), 2)
+            cv2.rectangle(frame, (xmin,ymin), (xmax,ymax), (10, 255, 0), 2) # Draw the rectangle around the predicted
 
             # Draw label
             object_name = labels[int(classes[i])] # Look up object name from "labels" array using class index
@@ -219,7 +225,7 @@ while True:
     time1 = (t2-t1)/freq
     frame_rate_calc= 1/time1
 
-    # Press 'q' to quit
+    # Press 'q' to quit at any time
     if cv2.waitKey(1) == ord('q'):
         break
 
