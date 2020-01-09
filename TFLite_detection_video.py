@@ -31,6 +31,15 @@ parser.add_argument('--threshold', help='Minimum confidence threshold for displa
                     default=0.5)
 parser.add_argument('--video', help='Name of the video file',
                     default='test.mp4')
+# The color of border (Blue value from 0 to 255)
+parser.add_argument('--bborder', help='The value of blue color [0 - 255] of border. Default is full 255]',
+                    default=255)
+# The color of border (Green value from 0 to 255)
+parser.add_argument('--gborder', help='The value of green color [0 - 255] of border. Default is 0]',
+                    default=0)
+# The color of border (Red value from 0 to 255)
+parser.add_argument('--rborder', help='The value of red color [0 - 255] of border. Default is 0]',
+                    default=0)
 parser.add_argument('--edgetpu', help='Use Coral Edge TPU Accelerator to speed up detection',
                     action='store_true')
 
@@ -41,6 +50,10 @@ GRAPH_NAME = args.graph
 LABELMAP_NAME = args.labels
 VIDEO_NAME = args.video
 min_conf_threshold = float(args.threshold)
+b = args.bborder
+g = args.gborder
+r = args.rborder
+bp, gp, rp = int(b), int(g), int(r)
 use_TPU = args.edgetpu
 
 # Import TensorFlow libraries
@@ -144,7 +157,7 @@ while(video.isOpened()):
             ymax = int(min(imH,(boxes[i][2] * imH)))
             xmax = int(min(imW,(boxes[i][3] * imW)))
             
-            cv2.rectangle(frame, (xmin,ymin), (xmax,ymax), (10, 255, 0), 4)
+            cv2.rectangle(frame, (xmin,ymin), (xmax,ymax), (bp, gp, rp), 4)
 
             # Draw label
             object_name = labels[int(classes[i])] # Look up object name from "labels" array using class index
