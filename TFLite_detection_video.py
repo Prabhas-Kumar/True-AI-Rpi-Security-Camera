@@ -1,14 +1,11 @@
 ######## Webcam Object Detection Using Tensorflow-trained Classifier #########
 #
-# Author: Evan Juras
-# Date: 10/2/19
+# Author: Prabhas Kumar
+# Date: 1/8/20
 # Description: 
 # This program uses a TensorFlow Lite model to perform object detection on a
 # video. It draws boxes and scores around the objects of interest in each frame
 # from the video.
-#
-# This code is based off the TensorFlow Lite image classification example at:
-# https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/examples/python/label_image.py
 #
 # I added my own method of drawing boxes and labels using OpenCV.
 
@@ -167,4 +164,4 @@ while(video.isOpened()):
 # Clean up
 video.release()
 cv2.destroyAllWindows()
-
+# For futher explaination read the comments of ...webcam.py & Readme.md
